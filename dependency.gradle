@@ -1,0 +1,69 @@
+//def daggerVersion = "2.0.2"
+def retrofitVersion = "2.1.0"
+def okHttpVersion = "3.4.1"
+def supportVersion = "24.1.0"
+//def rxBindingVersion = '0.4.0'
+def rxJavaVersion = 'x.y.z'
+def rxAndroidVersion = '1.2.1'
+
+def leakCanaryVersion = "1.4-beta2"
+def blockCanaryVersion = '1.2.1'
+
+ext {
+
+  // Android
+  libSupportV7 = "com.android.support:appcompat-v7:${supportVersion}"
+  libSupportV4 = "com.android.support:support-v4:${supportVersion}"
+  libSupportDesign = "com.android.support:design:${supportVersion}"
+  libSupportRecyclerview = "com.android.support:recyclerview-v7:${supportVersion}"
+  libSupportCardview = "com.android.support:cardview-v7:${supportVersion}"
+  libSupportPalette = "com.android.support:palette-v7:${supportVersion}"
+
+  // Retrofit
+  libRetrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+  libRetrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+  libRetrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+  libRetrofitScalars = "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
+
+  //OkHttp
+  libOkHttp = "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+  libOkHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
+  libOkio = "com.squareup.okio:okio:1.10.0"
+
+  // ReactiveX
+  libRxJava = "io.reactivex:rxjava:${rxJavaVersion}"
+  libRxAndroid = "io.reactivex:rxandroid:${rxAndroidVersion}"
+
+  // rxBinding
+  //  libRxBinding = "com.jakewharton.rxbinding:rxbinding:${rxBindingVersion}"
+  //  libRxBindingSupportV4 = "com.jakewharton.rxbinding:rxbinding-support-v4:${rxBindingVersion}"
+  //  libRxBindingAppcompatV7 = "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rxBindingVersion}"
+  //  libRxBindingDesign = "com.jakewharton.rxbinding:rxbinding-design:${rxBindingVersion}"
+  //  libRxBindingRecyclerview =
+  //      "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${rxBindingVersion}"
+
+  // others
+  //  libEventBus = "org.greenrobot:eventbus:3.0.0"
+  //  libJavaxAnnotation = "javax.annotation:jsr250-api:1.0"
+  libGson = "com.google.code.gson:gson:2.7"
+  //  libDagger = "com.google.dagger:dagger:${daggerVersion}"
+  //  libDaggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
+  libGlide = "com.github.bumptech.glide:glide:3.7.0"
+  libGlideTransformations = "jp.wasabeef:glide-transformations:2.0.1"
+  //  libRealm = "io.realm:realm-android:0.87.5"
+
+  libStetho = "com.facebook.stetho:stetho-okhttp3:1.3.1"
+
+  debugDependencies =
+      [leakCanary : "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+       blockCanary: "com.github.moduth:blockcanary-android:${blockCanaryVersion}"]
+
+  releaseDependencies =
+      [leakCanary : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+       blockCanary: "com.github.moduth:blockcanary-android:${blockCanaryVersion}"]
+
+  testDependencies =
+      [leakCanary : "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+       blockCanary: "com.github.moduth:blockcanary-android:${blockCanaryVersion}",
+       junit      : "junit:junit:4.12"]
+}
