@@ -1,1 +1,1 @@
-include ':app', ':lib_framework', ':lib_network'
+include ':app', ':lib_framework', ':lib_network', ':lib_uikit'

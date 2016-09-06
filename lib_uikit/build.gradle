@@ -19,11 +19,8 @@ android {
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-
-  testCompile rootProject.ext.testDependencies.junit
-  debugCompile rootProject.ext.debugDependencies.leakCanary
-  releaseCompile rootProject.ext.releaseDependencies.leakCanary
-  debugCompile rootProject.ext.debugDependencies.blockCanary
-  releaseCompile rootProject.ext.releaseDependencies.blockCanary
+  compile fileTree(include: ['*.jar'], dir: 'libs')
+  testCompile 'junit:junit:4.12'
+  compile 'com.android.support:appcompat-v7:24.2.0'
+  compile project(':lib_framework')
 }

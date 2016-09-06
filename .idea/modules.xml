@@ -4,8 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RetrofitDemp.iml" filepath="$PROJECT_DIR$/RetrofitDemp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lib_framework/mylibrary.iml" filepath="$PROJECT_DIR$/lib_framework/mylibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_framework/lib_framework.iml" filepath="$PROJECT_DIR$/lib_framework/lib_framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib_network/lib_network.iml" filepath="$PROJECT_DIR$/lib_network/lib_network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_uikit/lib_uikit.iml" filepath="$PROJECT_DIR$/lib_uikit/lib_uikit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib_framework/mylibrary.iml" filepath="$PROJECT_DIR$/lib_framework/mylibrary.iml" />
     </modules>
   </component>
 </project>

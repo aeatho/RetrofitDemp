@@ -31,8 +31,8 @@ public class ExceptionEngine {
         ex.message = "网络错误";  //均视为网络错误
       }
       return ex;
-    } else if (e instanceof ResultException) {    //服务器返回的错误
-      ResultException resultException = (ResultException) e;
+    } else if (e instanceof CommonResultException) {    //服务器返回的错误
+      CommonResultException resultException = (CommonResultException) e;
       ex = new ApiException(resultException, resultException.code);
       ex.message = resultException.message;
       return ex;

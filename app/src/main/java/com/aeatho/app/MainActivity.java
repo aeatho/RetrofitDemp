@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import com.aeatho.app.bean.MovieEntity;
+import com.aeatho.app.bean.PageVo;
+import com.aeatho.app.bean.RoomRegisterVo;
+import com.aeatho.app.network.ApiFactory;
 import com.aeatho.lib_network.listener.SubscriberOnNextListener;
 import com.aeatho.lib_network.subscriber.ProgressSubscriber;
-import com.aeatho.lib_network.transformer.RxHelper;
-import com.aeatho.app.network.ApiFactory;
+import com.aeatho.lib_network.transformer.Transformers;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
@@ -29,17 +31,32 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    final HashMap<String, String> values = new HashMap<>();
+
+    //带图片带价格通用传参
+    values.put("roomStatus", "1005002,1005003,1005005");
+    values.put("selectTags", "true");
+    values.put("selectPictures", "true");
+    values.put("selectCommunity", "true");
+    values.put("selectTags", "true");
+    values.put("page", "1");
+    values.put("pageSize", "20");
+    //values.put("cityId", AccountCache.getLastCityId());
+    values.put("recommend", "1");
+
     findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-        ApiFactory.getNewsApi().getTopMovie(0, 10)
-            .compose(RxHelper.<MovieEntity>handleResult())
+        ApiFactory.getNewsApi()
+            .getHouses(values)
+            .compose(Transformers.<PageVo<RoomRegisterVo>>handleResult())
             //.compose(RxHelper.handleResult())
             //.compose(Transformers.<MovieEntity>switchSchedulers())
-            .subscribe(new ProgressSubscriber<>(new SubscriberOnNextListener<MovieEntity>() {
-              @Override public void onNext(MovieEntity movieEntity) {
+            .subscribe(new ProgressSubscriber<PageVo<RoomRegisterVo>>(
+                new SubscriberOnNextListener<PageVo<RoomRegisterVo>>() {
+                  @Override public void onNext(PageVo<RoomRegisterVo> roomRegisterVoPageVo) {
 
-              }
-            }, MainActivity.this));
+                  }
+                }, MainActivity.this));
       }
     });
 

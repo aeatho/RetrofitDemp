@@ -1,9 +1,11 @@
 package com.aeatho.app.network;
 
-import com.aeatho.app.bean.MovieEntity;
+import com.aeatho.app.bean.PageVo;
+import com.aeatho.app.bean.RoomRegisterVo;
 import com.aeatho.lib_network.bean.HttpResponse;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
+import java.util.HashMap;
+import retrofit2.http.POST;
+import retrofit2.http.QueryMap;
 import rx.Observable;
 
 /**
@@ -19,6 +21,6 @@ import rx.Observable;
  */
 public interface NewsApi {
 
-  @GET("top250") Observable<HttpResponse<MovieEntity>> getTopMovie(@Query("start") int start,
-      @Query("count") int count);
+  @POST("room/roomregister") Observable<HttpResponse<PageVo<RoomRegisterVo>>> getHouses(
+      @QueryMap HashMap<String, String> values);
 }

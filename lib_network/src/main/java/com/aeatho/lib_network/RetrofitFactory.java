@@ -23,7 +23,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 public class RetrofitFactory {
   //public static final String API_SERVER = UIUtils.getString(R.string.base_url);
-  public static final String API_SERVER = "https://api.douban.com/v2/movie/";
+  public static final String API_SERVER = "http://dev.unovo.com.cn/saas20/api/1/AptGuest/";
 
   private static RetrofitFactory instance;
 
