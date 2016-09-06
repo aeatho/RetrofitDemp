@@ -15,8 +15,12 @@ import okhttp3.Response;
  * @date: 16/9/6 10:14
  * @version: V1.0
  */
-public class ResponseCheckInterceptor implements Interceptor {
+public class TokenInterceptor implements Interceptor {
   @Override public Response intercept(Chain chain) throws IOException {
-    return null;
+    Response response = chain.proceed(chain.request());
+
+    String responseBody = response.body().string();
+
+    return response;
   }
 }

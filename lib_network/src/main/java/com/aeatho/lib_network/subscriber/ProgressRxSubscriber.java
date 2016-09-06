@@ -3,7 +3,6 @@ package com.aeatho.lib_network.subscriber;
 import android.content.Context;
 import android.widget.Toast;
 import com.aeatho.lib_network.error.ApiException;
-import com.aeatho.lib_network.listener.SubscriberOnNextListener;
 import com.aeatho.lib_network.progress.ProgressCancelListener;
 import com.aeatho.lib_network.progress.ProgressDialogHandler;
 
@@ -20,22 +19,22 @@ import com.aeatho.lib_network.progress.ProgressDialogHandler;
  * @date: 16/9/5 16:54
  * @version: V1.0
  */
-public class ProgressSubscriber<T> extends ErrorSubscriber<T> implements ProgressCancelListener {
-
-  private SubscriberOnNextListener<T> mSubscriberOnNextListener;
+public abstract class ProgressRxSubscriber<T> extends RxSubscriber<T>
+    implements ProgressCancelListener {
+  //private SubscriberOnNextListener<T> mSubscriberOnNextListener;
   private ProgressDialogHandler mProgressDialogHandler;
 
-  private Context context;
+  private Context mContext;
 
-  public ProgressSubscriber(SubscriberOnNextListener<T> subscriberOnNextListener, Context context) {
-    this(subscriberOnNextListener, context, true);
+  public ProgressRxSubscriber(Context context) {
+    this(context, true);
   }
 
-  public ProgressSubscriber(SubscriberOnNextListener<T> mSubscriberOnNextListener, Context context,
+  public ProgressRxSubscriber(Context context,
       boolean cancel) {
-    this.mSubscriberOnNextListener = mSubscriberOnNextListener;
-    this.context = context;
-    mProgressDialogHandler = new ProgressDialogHandler(context, this, cancel);
+    //this.mSubscriberOnNextListener = mSubscriberOnNextListener;
+    this.mContext = context;
+    this.mProgressDialogHandler = new ProgressDialogHandler(context, this, cancel);
   }
 
   private void showProgressDialog() {
@@ -68,26 +67,26 @@ public class ProgressSubscriber<T> extends ErrorSubscriber<T> implements Progres
     dismissProgressDialog();
   }
 
-  /**
-   * 对错误进行统一处理
-   * 隐藏ProgressDialog
-   */
-
+  ///**
+  // * 对错误进行统一处理
+  // * 隐藏ProgressDialog
+  // */
+  //
   @Override protected void onError(ApiException ex) {
     dismissProgressDialog();
-    Toast.makeText(context, ex.message, Toast.LENGTH_SHORT).show();
+    Toast.makeText(mContext, ex.message, Toast.LENGTH_SHORT).show();
   }
-
-  /**
-   * 将onNext方法中的返回结果交给Activity或Fragment自己处理
-   *
-   * @param t 创建Subscriber时的泛型类型
-   */
-  @Override public void onNext(T t) {
-    if (mSubscriberOnNextListener != null) {
-      mSubscriberOnNextListener.onNext(t);
-    }
-  }
+  //
+  ///**
+  // * 将onNext方法中的返回结果交给Activity或Fragment自己处理
+  // *
+  // * @param t 创建Subscriber时的泛型类型
+  // */
+  //@Override public void onNext(T t) {
+  //  if (mSubscriberOnNextListener != null) {
+  //    mSubscriberOnNextListener.onNext(t);
+  //  }
+  //}
 
   /**
    * 取消ProgressDialog的时候，取消对observable的订阅，同时也取消了http请求

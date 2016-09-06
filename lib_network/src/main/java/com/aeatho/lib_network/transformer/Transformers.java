@@ -1,7 +1,7 @@
 package com.aeatho.lib_network.transformer;
 
 import com.aeatho.lib_network.bean.HttpResponse;
-import com.aeatho.lib_network.error.ERROR;
+import com.aeatho.lib_network.error.ErrorCode;
 import com.aeatho.lib_network.error.ExceptionEngine;
 import com.aeatho.lib_network.error.CommonResultException;
 import com.aeatho.lib_network.error.SessionInvalidException;
@@ -31,7 +31,7 @@ public class Transformers {
           @Override public T call(HttpResponse<T> tResponse) {
             if (tResponse.isSuccessful()) {
               return tResponse.getData();
-            } else if (ERROR.TOKEN_ERROR == tResponse.getCode()) {
+            } else if (ErrorCode.TOKEN_INVALID == tResponse.getCode()) {
               throw new SessionInvalidException();
             } else {
               throw new CommonResultException(tResponse.getCode(), tResponse.getMsg());

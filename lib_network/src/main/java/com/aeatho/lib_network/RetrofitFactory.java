@@ -1,5 +1,6 @@
 package com.aeatho.lib_network;
 
+import com.aeatho.lib_network.interceptor.TokenInterceptor;
 import com.aeatho.lib_network.utils.GsonHelper;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +26,7 @@ public class RetrofitFactory {
   //public static final String API_SERVER = UIUtils.getString(R.string.base_url);
   public static final String API_SERVER = "http://dev.unovo.com.cn/saas20/api/1/AptGuest/";
 
-  private static RetrofitFactory instance;
+  private volatile static RetrofitFactory instance;
 
   public static RetrofitFactory getInstance() {
     if (instance == null) {
@@ -74,6 +75,7 @@ public class RetrofitFactory {
     if (BuildConfig.DEBUG) {
       builder.addNetworkInterceptor(new StethoInterceptor());
     }
+    builder.addNetworkInterceptor(new TokenInterceptor());
     return builder.build();
   }
 }

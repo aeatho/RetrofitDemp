@@ -7,8 +7,7 @@ import android.view.View;
 import com.aeatho.app.bean.PageVo;
 import com.aeatho.app.bean.RoomRegisterVo;
 import com.aeatho.app.network.ApiFactory;
-import com.aeatho.lib_network.listener.SubscriberOnNextListener;
-import com.aeatho.lib_network.subscriber.ProgressSubscriber;
+import com.aeatho.lib_network.subscriber.ProgressRxSubscriber;
 import com.aeatho.lib_network.transformer.Transformers;
 import java.util.HashMap;
 import java.util.List;
@@ -51,12 +50,22 @@ public class MainActivity extends AppCompatActivity {
             .compose(Transformers.<PageVo<RoomRegisterVo>>handleResult())
             //.compose(RxHelper.handleResult())
             //.compose(Transformers.<MovieEntity>switchSchedulers())
-            .subscribe(new ProgressSubscriber<PageVo<RoomRegisterVo>>(
-                new SubscriberOnNextListener<PageVo<RoomRegisterVo>>() {
-                  @Override public void onNext(PageVo<RoomRegisterVo> roomRegisterVoPageVo) {
+            //.subscribe(new ProgressSubscriber<PageVo<RoomRegisterVo>>(
+            //    new SubscriberOnNextListener<PageVo<RoomRegisterVo>>() {
+            //      @Override public void onNext(PageVo<RoomRegisterVo> roomRegisterVoPageVo) {
+            //
+            //      }
+            //    }, MainActivity.this));
+            .subscribe(new ProgressRxSubscriber<PageVo<RoomRegisterVo>>(MainActivity.this) {
+              @Override protected void onSuccess(PageVo<RoomRegisterVo> response) {
 
-                  }
-                }, MainActivity.this));
+              }
+            });
+        //.subscribe(new RxSubscriber<PageVo<RoomRegisterVo>>() {
+        //  @Override protected void onSuccess(PageVo<RoomRegisterVo> response) {
+        //
+        //  }
+        //});
       }
     });
 

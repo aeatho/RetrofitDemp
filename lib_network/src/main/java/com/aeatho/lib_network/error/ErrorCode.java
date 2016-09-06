@@ -11,7 +11,7 @@ package com.aeatho.lib_network.error;
  * @date: 16/9/6 13:11
  * @version: V1.0
  */
-public class ERROR {
+public class ErrorCode {
 
   /**
    * 未知错误
@@ -33,5 +33,5 @@ public class ERROR {
   /**
    * ticket超时
    */
-  public static final int TOKEN_ERROR = -9999;
+  public static final int TOKEN_INVALID = -9999;
 }
