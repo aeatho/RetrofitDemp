@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+
+android {
+  signingConfigs {
+    signing {
+      keyAlias 'apatment'
+      keyPassword 'intebox'
+      storeFile file('/Users/Aeatho/Android/Unovo/new_intebox.key')
+      storePassword 'intebox'
+    }
+  }
+  compileSdkVersion 24
+  buildToolsVersion "24.0.1"
+  defaultConfig {
+    applicationId "com.aeatho.retrofit"
+    minSdkVersion 14
+    targetSdkVersion 24
+    versionCode 1
+    versionName "1.0"
+  }
+  buildTypes {
+    release {
+//      zipAlignEnabled true
+//      shrinkResources true
+//      minifyEnabled true
+      signingConfig signingConfigs.signing
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+  productFlavors {
+    /**
+     * 正式上线发布版本*/
+    apt {
+      manifestPlaceholders =
+          [APP_LABEL   : "@string/app_name", AMAP_APIKEY: "d03bfe5bb9d82b4accf4933a3b977c9a",
+           JPUSH_APIKEY: "5d4c1f6de2f88dc82a8b85ab",
+           UMENG_APIKEY: "57bfe3c2e0f55ab0f7004068"]
+      resValue "string", "base_url", "http://dev.unovo.com.cn/"
+    }
+  }
+}
+
+dependencies {
+  compile fileTree(include: ['*.jar'], dir: 'libs')
+  testCompile 'junit:junit:4.12'
+  apt 'com.jakewharton:butterknife-compiler:8.4.0'
+  compile 'com.android.support:appcompat-v7:24.2.0'
+  compile 'com.android.support:design:24.2.0'
+  compile 'com.jakewharton:butterknife:8.4.0'
+  compile project(':lib_framework')
+  compile project(':lib_network')
+}
